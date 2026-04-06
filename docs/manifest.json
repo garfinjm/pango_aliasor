@@ -1,0 +1,10 @@
+{
+  "name": "Pango Lineage Aliasor",
+  "short_name": "Pango Aliasor",
+  "description": "Translate between aliased and unaliased SARS-CoV-2 Pango lineage designations",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#2563eb",
+  "icons": []
+}

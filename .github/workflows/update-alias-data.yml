@@ -1,0 +1,45 @@
+name: Update alias data
+
+on:
+  schedule:
+    # Daily at 06:00 UTC (midnight CST / 1:00 AM CDT)
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-alias-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch latest alias_key.json
+        run: |
+          curl -sfL -o docs/alias_key.json \
+            "https://raw.githubusercontent.com/cov-lineages/pango-designation/master/pango_designation/alias_key.json"
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet docs/alias_key.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bump service worker cache version
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          # Increment the cache version so the PWA picks up new data
+          sed -i 's/pango-aliasor-v[0-9]*/pango-aliasor-v'$(date +%Y%m%d)'/' docs/sw.js
+
+      - name: Commit and push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/alias_key.json docs/sw.js
+          git commit -m "Update alias_key.json from upstream pango-designation"
+          git push

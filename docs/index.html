@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pango Lineage Aliasor</title>
+  <meta name="description" content="Translate between aliased and unaliased SARS-CoV-2 Pango lineage designations">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+</head>
+<body>
+  <h1>Pango Lineage Aliasor</h1>
+  <p class="subtitle">Translate between aliased and unaliased SARS-CoV-2 Pango lineage designations</p>
+
+  <div class="card">
+    <label for="lineage-input">Lineage</label>
+    <input type="text" id="lineage-input" placeholder="e.g. BA.5 or B.1.1.529.5" autocomplete="off" spellcheck="false">
+
+    <div class="btn-row">
+      <button id="btn-uncompress" class="primary">Uncompress</button>
+      <button id="btn-compress">Compress</button>
+      <button id="btn-parent">Parent</button>
+    </div>
+
+    <button class="advanced-toggle" id="advanced-toggle">▸ Advanced options</button>
+
+    <div class="advanced-section" id="advanced-section">
+      <label for="up-to">Indirection level (up_to)</label>
+      <input type="number" id="up-to" value="0" min="0" max="20">
+
+      <label for="accepted-aliases">Accepted aliases (comma-separated)</label>
+      <input type="text" id="accepted-aliases" placeholder="e.g. BA, AY">
+
+      <div class="btn-row">
+        <button id="btn-partial" class="primary">Partial Compress</button>
+      </div>
+    </div>
+
+    <div class="result empty" id="result">Result will appear here</div>
+  </div>
+
+  <div class="status-bar" id="status">Loading…</div>
+
+  <footer>
+    Powered by <a href="https://github.com/cov-lineages/pango-designation" target="_blank" rel="noopener">pango-designation</a> alias data.
+    Source: <a href="https://github.com/garfinjm/pango_aliasor" target="_blank" rel="noopener">garfinjm/pango_aliasor</a>
+  </footer>
+
+  <script src="aliasor.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
