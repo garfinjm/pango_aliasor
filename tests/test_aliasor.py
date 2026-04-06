@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 import os
-import shutil
+from distutils import dir_util
 
 from pango_aliasor.aliasor import Aliasor
 from pytest import fixture
@@ -18,7 +18,7 @@ def datadir(tmpdir, request):
     test_dir, _ = os.path.splitext(filename)
 
     if os.path.isdir(test_dir):
-        shutil.copytree(test_dir, str(tmpdir), dirs_exist_ok=True)
+        dir_util.copy_tree(test_dir,str(tmpdir))
 
     return tmpdir
 
