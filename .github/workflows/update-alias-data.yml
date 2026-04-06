@@ -2,7 +2,7 @@ name: Update alias data
 
 on:
   schedule:
-    # Daily at midnight Central USA time (06:00 UTC)
+    # Daily at 06:00 UTC (midnight CST / 1:00 AM CDT)
     - cron: "0 6 * * *"
   workflow_dispatch:
 

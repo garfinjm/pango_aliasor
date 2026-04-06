@@ -114,7 +114,7 @@ class Aliasor {
     if (acceptedAliases.size > 0) {
       for (let level = indirections; level > upTo; level--) {
         const toAlias = nameSplit.slice(0, 3 * level + 1).join(".");
-        if (toAlias in this.realiasDict || this.realiasDict.hasOwnProperty(toAlias)) {
+        if (Object.prototype.hasOwnProperty.call(this.realiasDict, toAlias)) {
           if (acceptedAliases.has(this.realiasDict[toAlias])) {
             alias = this.realiasDict[toAlias];
             return alias + "." + nameSplit.slice(3 * level + 1).join(".");
