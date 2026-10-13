@@ -1,4 +1,4 @@
-const CACHE_NAME = "pango-aliasor-v20260828";
+const CACHE_NAME = "pango-aliasor-v20261013";
 const ASSETS = [
   "./",
   "index.html",
